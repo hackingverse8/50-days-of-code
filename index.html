@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Master Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/lucide@latest/dist/umd/lucide.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="container">
+        <!-- Start Screen -->
+        <div id="startScreen" class="text-center">
+            <div class="game-intro">
+                <div class="logo-container animate-bounce">
+                    <i data-lucide="shield-lock" class="logo-icon"></i>
+                </div>
+                <h1 class="game-title">Password Master Challenge</h1>
+                <p class="intro-text">Create the world's most epic password by completing mind-bending challenges!</p>
+                
+                <div class="side-stats-container">
+                    <div class="stat-box">
+                        <div class="stat-content">
+                            <i data-lucide="database" class="stat-icon"></i>
+                            <div class="stat-info">
+                                <span class="stat-number">35</span>
+                                <span class="stat-label">Total Challenges</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-box">
+                        <div class="stat-content">
+                            <i data-lucide="target" class="stat-icon"></i>
+                            <div class="stat-info">
+                                <span class="stat-number">15</span>
+                                <span class="stat-label">Tasks Per Game</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature animate-fade-in">
+                        <i data-lucide="shuffle" class="feature-icon"></i>
+                        <span>Random Challenges</span>
+                    </div>
+                    <div class="feature animate-fade-in" style="animation-delay: 0.2s">
+                        <i data-lucide="brain" class="feature-icon"></i>
+                        <span>Brain Teasers</span>
+                    </div>
+                    <div class="feature animate-fade-in" style="animation-delay: 0.4s">
+                        <i data-lucide="shield" class="feature-icon"></i>
+                        <span>Security Master</span>
+                    </div>
+                    <div class="feature animate-fade-in" style="animation-delay: 0.6s">
+                        <i data-lucide="trophy" class="feature-icon"></i>
+                        <span>Win Rewards</span>
+                    </div>
+                </div>
+
+                <button id="startGameBtn" class="primary-button animate-pulse">
+                    <i data-lucide="play"></i>
+                    <span>Begin Challenge</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="game-container hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <span class="progress-text">Challenge 0/15</span>
+            </div>
+            
+            <div class="input-container">
+                <input type="text" id="passwordInput" placeholder="Type your legendary password...">
+                <div class="password-strength">
+                    <div class="strength-bar"></div>
+                    <span class="strength-text">Password Strength: Weak</span>
+                </div>
+            </div>
+
+            <div class="current-task-container">
+                <div class="task-header">
+                    <i data-lucide="target" class="task-icon"></i>
+                    <span>Current Challenge</span>
+                </div>
+                <div id="currentTask" class="task-content"></div>
+            </div>
+
+            <div id="completedTasks" class="completed-tasks">
+                <div class="completed-header">
+                    <i data-lucide="check-circle" class="completed-icon"></i>
+                    <span>Completed Challenges</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victoryScreen" class="victory-screen hidden">
+            <div class="confetti-container"></div>
+            <div class="victory-content">
+                <i data-lucide="crown" class="crown-icon"></i>
+                <h2>🎉 Password Master Achieved! 🎉</h2>
+                <p>You've created an unbreakable password!</p>
+                
+                <div class="password-display">
+                    <input type="text" id="finalPassword" readonly>
+                    <button id="copyPassword" class="copy-btn">
+                        <i data-lucide="copy"></i>
+                        Copy
+                    </button>
+                </div>
+
+                <div class="final-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="timeSpent">0:00</span>
+                        <span class="stat-label">Time</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="passwordStrength">Legendary</span>
+                        <span class="stat-label">Strength</span>
+                    </div>
+                </div>
+
+                <button class="play-again-btn">
+                    <i data-lucide="refresh-cw"></i>
+                    Challenge Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="taskCompleteSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.wav"></audio>
+    <audio id="victorySound" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.wav"></audio>
+    <audio id="taskFailSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.wav"></audio>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
+
+    <footer class="footer">
+        <p class="footer-text">
+            Made with <span class="heart">❤️</span> by 
+            <a href="https://www.linkedin.com/in/aadilnaushadkhan/" target="_blank" class="footer-link">Aadil</a> 
+            from 
+            <a href="https://www.youthstory.in" target="_blank" class="footer-link">d2d Youth Story</a>
+        </p>
+    </footer>
+</body>
+</html>
